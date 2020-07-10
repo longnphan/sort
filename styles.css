@@ -1,0 +1,16 @@
+body {
+  background-color: black;
+}
+
+button {
+  background: #191919;
+  color: white;
+  font-size: 1rem;
+  margin: 10px;
+  padding: 5px;
+}
+
+#myCanvas {
+  background: #191919;
+  border: 2px gray solid;
+}
