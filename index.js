@@ -69,7 +69,7 @@ function* insertionSort(array) {
 
     //Animate sorting
     draw(array, j);
-    yield i;
+    yield j;
   }
   return array;
 }
@@ -101,7 +101,7 @@ function* selectSort(array) {
 
       //Animate sorting
       draw(array, min);
-      yield i;
+      yield min;
     }
   }
 }
