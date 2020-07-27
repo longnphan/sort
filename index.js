@@ -1,9 +1,9 @@
 // Generate array
 const arr = [];
-let value = 60;
-for (let i = 0; i < 37; i++) {
+let value = 5;
+for (let i = 0; i < 32; i++) {
   arr.push(value);
-  value += 5;
+  value += 25;
 }
 
 //shuffles the array elements using the Fisher-Yates shuffle
@@ -48,6 +48,7 @@ window.onload = () => {
 
 //Insertion Sort Algorithm
 function insertion() {
+  reset();
   let sortMethod = insertionSort(arr);
 
   function animate() {
@@ -67,7 +68,6 @@ function* insertionSort(array) {
     }
     array[j + 1] = temp;
 
-    //Animate sorting
     draw(array, j);
     yield j;
   }
@@ -76,6 +76,7 @@ function* insertionSort(array) {
 
 //Selection Sort
 function selection() {
+  reset();
   let sortMethod = selectSort(arr);
 
   function animate() {
@@ -99,7 +100,6 @@ function* selectSort(array) {
       array[i] = array[min];
       array[min] = temp;
 
-      //Animate sorting
       draw(array, min);
       yield min;
     }
@@ -108,6 +108,7 @@ function* selectSort(array) {
 
 //Bubble Sort
 function bubble() {
+  reset();
   let sortMethod = bubbleSort(arr);
 
   function animate() {
@@ -125,7 +126,6 @@ function* bubbleSort(array) {
         array[j + 1] = array[j];
         array[j] = temp;
 
-        //Animate sorting
         draw(array, j);
         yield j;
       }
