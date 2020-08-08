@@ -8,10 +8,15 @@ button {
   font-size: 17px;
   margin: 10px;
   padding: 5px;
+  outline: none;
 }
 
 button:active {
   transform: scale(0.96);
+}
+
+button:hover {
+  filter: brightness(250%);
 }
 
 #myCanvas {
