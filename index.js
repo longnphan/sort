@@ -58,6 +58,8 @@ window.onload = () => {
 
 //Insertion Sort Algorithm
 function insertion() {
+  insertionBtn.disabled = true;
+  setTimeout(function(){insertionBtn.disabled = false},700);
   reset();
   let sortMethod = insertionSort(arr);
 
@@ -86,6 +88,8 @@ function* insertionSort(array) {
 
 //Selection Sort
 function selection() {
+  selectionBtn.disabled = true;
+  setTimeout(function(){selectionBtn.disabled = false},600);
   reset();
   let sortMethod = selectSort(arr);
 
@@ -118,6 +122,8 @@ function* selectSort(array) {
 
 //Bubble Sort
 function bubble() {
+  document.querySelector("button").disabled = true;
+  setTimeout(function(){document.querySelector("button").disabled = false},4300);
   reset();
   let sortMethod = bubbleSort(arr);
 
