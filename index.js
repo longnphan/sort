@@ -1,3 +1,13 @@
+const bubbleBtn = document.querySelector(".bubble-btn");
+const selectionBtn = document.querySelector(".selection-btn");
+const insertionBtn = document.querySelector(".insertion-btn");
+const resetBtn = document.querySelector(".reset-btn");
+
+bubbleBtn.addEventListener("click", bubble);
+selectionBtn.addEventListener("click", selection);
+insertionBtn.addEventListener("click", insertion);
+resetBtn.addEventListener("click", reset);
+
 // Generate array
 const arr = [];
 let value = 5;
