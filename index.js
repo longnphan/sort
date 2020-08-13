@@ -2,6 +2,8 @@ const bubbleBtn = document.querySelector(".bubble-btn");
 const selectionBtn = document.querySelector(".selection-btn");
 const insertionBtn = document.querySelector(".insertion-btn");
 const resetBtn = document.querySelector(".reset-btn");
+let numOfSwaps = document.querySelector(".swap-text");
+let swaps = 0;
 
 bubbleBtn.addEventListener("click", bubble);
 selectionBtn.addEventListener("click", selection);
@@ -56,10 +58,18 @@ window.onload = () => {
   draw(arr, 0);
 }
 
+
 //Insertion Sort Algorithm
 function insertion() {
   insertionBtn.disabled = true;
+  selectionBtn.disabled = true;
+  bubbleBtn.disabled = true;
+  resetBtn.disabled = true;
   setTimeout(function(){insertionBtn.disabled = false},700);
+  setTimeout(function(){selectionBtn.disabled = false},700);
+  setTimeout(function(){bubbleBtn.disabled = false},700);
+  setTimeout(function(){resetBtn.disabled = false},700);
+
   reset();
   let sortMethod = insertionSort(arr);
 
@@ -80,6 +90,9 @@ function* insertionSort(array) {
     }
     array[j + 1] = temp;
 
+    swaps++;
+    numOfSwaps.innerHTML = `Swaps: ${swaps}`;
+
     draw(array, j);
     yield j;
   }
@@ -88,8 +101,14 @@ function* insertionSort(array) {
 
 //Selection Sort
 function selection() {
+  insertionBtn.disabled = true;
   selectionBtn.disabled = true;
+  bubbleBtn.disabled = true;
+  resetBtn.disabled = true;
+  setTimeout(function(){insertionBtn.disabled = false},600);
   setTimeout(function(){selectionBtn.disabled = false},600);
+  setTimeout(function(){bubbleBtn.disabled = false},600);
+  setTimeout(function(){resetBtn.disabled = false},600);
   reset();
   let sortMethod = selectSort(arr);
 
@@ -110,9 +129,13 @@ function* selectSort(array) {
       }
     }
     if (min !== i) {
+
       let temp = array[i];
       array[i] = array[min];
       array[min] = temp;
+
+      swaps++;
+      numOfSwaps.innerHTML = `Swaps: ${swaps}`;
 
       draw(array, min);
       yield min;
@@ -122,8 +145,14 @@ function* selectSort(array) {
 
 //Bubble Sort
 function bubble() {
-  document.querySelector("button").disabled = true;
-  setTimeout(function(){document.querySelector("button").disabled = false},4300);
+  insertionBtn.disabled = true;
+  selectionBtn.disabled = true;
+  bubbleBtn.disabled = true;
+  resetBtn.disabled = true;
+  setTimeout(function(){insertionBtn.disabled = false},4300);
+  setTimeout(function(){selectionBtn.disabled = false},4300);
+  setTimeout(function(){bubbleBtn.disabled = false},4300);
+  setTimeout(function(){resetBtn.disabled = false},4300);
   reset();
   let sortMethod = bubbleSort(arr);
 
@@ -138,10 +167,13 @@ function* bubbleSort(array) {
   for (let i = 0; i < array.length; i++) {
     for (let j = 0; j < array.length - i - 1; j++) {
       if (array[j] > array[j + 1]) {
+
         let temp = array[j + 1];
         array[j + 1] = array[j];
         array[j] = temp;
 
+        swaps++;
+        numOfSwaps.innerHTML = `Swaps: ${swaps}`;
         draw(array, j);
         yield j;
       }
@@ -151,6 +183,7 @@ function* bubbleSort(array) {
 
 //Reset Array
 function reset() {
+  swaps = 0;
   shuffle(arr);
   draw(arr, 0);
 }
