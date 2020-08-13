@@ -16,7 +16,7 @@ button:active {
 }
 
 button:hover {
-  filter: brightness(250%);
+  filter: brightness(190%);
 }
 
 .swap-text{

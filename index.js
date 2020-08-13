@@ -5,12 +5,6 @@ const resetBtn = document.querySelector(".reset-btn");
 let numOfSwaps = document.querySelector(".swap-text");
 let swaps = 0;
 
-//Button event listeners
-bubbleBtn.addEventListener("click", bubble);
-selectionBtn.addEventListener("click", selection);
-insertionBtn.addEventListener("click", insertion);
-resetBtn.addEventListener("click", reset);
-
 // Generate array
 const arr = [];
 let value = 5;
@@ -52,26 +46,66 @@ function draw(array, color) {
   }
 }
 
-//Initial canvas drawing
-window.onload = () => {
-  canvas = document.querySelector("#myCanvas");
-  shuffle(arr);
-  draw(arr, 0);
-}
-
-//Insertion Sort Algorithm
-function insertion() {
-  disableButtons(700);
+//Sorting Algorithm
+function sortingAlgorithm(sortMethod, time) {
+  //Disables buttons from being press while sorting algorithm is running
+  disableButtons(time);
+  //Displays new shuffled array on canvas
   reset();
-  let sortMethod = insertionSort(arr);
 
+  //Animates the Sorting Algorithm swaps
   function animate() {
     requestAnimationFrame(animate);
     sortMethod.next();
   }
   animate(arr);
 }
-//Generator function for Insertion Sort
+
+//Generator function for Bubble Sort Algorithm
+function* bubbleSort(array) {
+  for (let i = 0; i < array.length; i++) {
+    for (let j = 0; j < array.length - i - 1; j++) {
+      if (array[j] > array[j + 1]) {
+        let temp = array[j + 1];
+        array[j + 1] = array[j];
+        array[j] = temp;
+
+        //Update swap counter
+        swaps++;
+        numOfSwaps.innerHTML = `Swaps: ${swaps}`;
+        draw(array, j);
+        yield j;
+      }
+    }
+  }
+}
+
+//Generator function for Select Sort Algorithm
+function* selectSort(array) {
+  for (i = 0; i < array.length; i++) {
+    let min = i;
+    for (j = i + 1; j < array.length; j++) {
+      if (array[j] < array[min]) {
+        min = j;
+      }
+    }
+    if (min !== i) {
+      //Swap elements
+      let temp = array[i];
+      array[i] = array[min];
+      array[min] = temp;
+
+      //Update swap counter
+      swaps++;
+      numOfSwaps.innerHTML = `Swaps: ${swaps}`;
+
+      draw(array, min);
+      yield min;
+    }
+  }
+}
+
+//Generator function for Insertion Sort Algorithm
 function* insertionSort(array) {
   for (let i = 1; i < array.length; i++) {
     let temp = array[i];
@@ -92,92 +126,31 @@ function* insertionSort(array) {
   return array;
 }
 
-//Selection Sort
-function selection() {
-  disableButtons(600);
-  reset();
-  let sortMethod = selectSort(arr);
-
-  function animate() {
-    requestAnimationFrame(animate);
-    sortMethod.next();
-  }
-  animate(arr);
-}
-//Generator function for Selection Sort Algorithm
-function* selectSort(array) {
-  for (i = 0; i < array.length; i++) {
-    let min = i;
-
-    for (j = i + 1; j < array.length; j++) {
-      if (array[j] < array[min]) {
-        min = j;
-      }
-    }
-    if (min !== i) {
-
-      let temp = array[i];
-      array[i] = array[min];
-      array[min] = temp;
-
-      //Update swap counter
-      swaps++;
-      numOfSwaps.innerHTML = `Swaps: ${swaps}`;
-
-      draw(array, min);
-      yield min;
-    }
-  }
-}
-
-//Bubble Sort
-function bubble() {
-  disableButtons(4100);
-  reset();
-  let sortMethod = bubbleSort(arr);
-
-  function animate() {
-    requestAnimationFrame(animate);
-    sortMethod.next();
-  }
-  animate(arr);
-}
-//Generator function for Bubble Sort Algorithm
-function* bubbleSort(array) {
-  for (let i = 0; i < array.length; i++) {
-    for (let j = 0; j < array.length - i - 1; j++) {
-      if (array[j] > array[j + 1]) {
-
-        let temp = array[j + 1];
-        array[j + 1] = array[j];
-        array[j] = temp;
-
-        //Update swap counter
-        swaps++;
-        numOfSwaps.innerHTML = `Swaps: ${swaps}`;
-        draw(array, j);
-        yield j;
-      }
-    }
-  }
-}
-
 //Disable buttons while sorting is in progress
 function disableButtons(time) {
+  //Disables buttons when button is pressed
   insertionBtn.disabled = true;
   selectionBtn.disabled = true;
   bubbleBtn.disabled = true;
   resetBtn.disabled = true;
-  setTimeout(function(){insertionBtn.removeAttribute("disabled")},time);
-  setTimeout(function(){selectionBtn.removeAttribute("disabled")},time);
-  setTimeout(function(){bubbleBtn.removeAttribute("disabled")},time);
-  setTimeout(function(){resetBtn.removeAttribute("disabled")},time);
+  //Enables buttons to be pressed
+  setTimeout(function(){insertionBtn.removeAttribute("disabled")}, time);
+  setTimeout(function(){selectionBtn.removeAttribute("disabled")}, time);
+  setTimeout(function(){bubbleBtn.removeAttribute("disabled")}, time);
+  setTimeout(function(){resetBtn.removeAttribute("disabled")}, time);
 }
 
 //Reset Array
 function reset() {
   swaps = 0;
   numOfSwaps.innerHTML = `Swaps: ${swaps}`;
+  shuffle(arr);
+  draw(arr, 0);
+}
+
+//Loads canvas with shuffled array
+window.onload = () => {
+  canvas = document.querySelector("#myCanvas");
   shuffle(arr);
   draw(arr, 0);
 }
