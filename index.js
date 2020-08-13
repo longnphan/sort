@@ -5,6 +5,7 @@ const resetBtn = document.querySelector(".reset-btn");
 let numOfSwaps = document.querySelector(".swap-text");
 let swaps = 0;
 
+//Button event listeners
 bubbleBtn.addEventListener("click", bubble);
 selectionBtn.addEventListener("click", selection);
 insertionBtn.addEventListener("click", insertion);
@@ -13,7 +14,7 @@ resetBtn.addEventListener("click", reset);
 // Generate array
 const arr = [];
 let value = 5;
-for (let i = 0; i < 32; i++) {
+for (let i = 0; i < 29; i++) {
   arr.push(value);
   value += 25;
 }
@@ -61,15 +62,7 @@ window.onload = () => {
 
 //Insertion Sort Algorithm
 function insertion() {
-  insertionBtn.disabled = true;
-  selectionBtn.disabled = true;
-  bubbleBtn.disabled = true;
-  resetBtn.disabled = true;
-  setTimeout(function(){insertionBtn.disabled = false},700);
-  setTimeout(function(){selectionBtn.disabled = false},700);
-  setTimeout(function(){bubbleBtn.disabled = false},700);
-  setTimeout(function(){resetBtn.disabled = false},700);
-
+  disableButtons(700);
   reset();
   let sortMethod = insertionSort(arr);
 
@@ -101,14 +94,7 @@ function* insertionSort(array) {
 
 //Selection Sort
 function selection() {
-  insertionBtn.disabled = true;
-  selectionBtn.disabled = true;
-  bubbleBtn.disabled = true;
-  resetBtn.disabled = true;
-  setTimeout(function(){insertionBtn.disabled = false},600);
-  setTimeout(function(){selectionBtn.disabled = false},600);
-  setTimeout(function(){bubbleBtn.disabled = false},600);
-  setTimeout(function(){resetBtn.disabled = false},600);
+  disableButtons(600);
   reset();
   let sortMethod = selectSort(arr);
 
@@ -145,14 +131,7 @@ function* selectSort(array) {
 
 //Bubble Sort
 function bubble() {
-  insertionBtn.disabled = true;
-  selectionBtn.disabled = true;
-  bubbleBtn.disabled = true;
-  resetBtn.disabled = true;
-  setTimeout(function(){insertionBtn.disabled = false},4300);
-  setTimeout(function(){selectionBtn.disabled = false},4300);
-  setTimeout(function(){bubbleBtn.disabled = false},4300);
-  setTimeout(function(){resetBtn.disabled = false},4300);
+  disableButtons(4100);
   reset();
   let sortMethod = bubbleSort(arr);
 
@@ -179,6 +158,18 @@ function* bubbleSort(array) {
       }
     }
   }
+}
+
+//Disable buttons while sorting is in progress
+function disableButtons(time) {
+  insertionBtn.disabled = true;
+  selectionBtn.disabled = true;
+  bubbleBtn.disabled = true;
+  resetBtn.disabled = true;
+  setTimeout(function(){insertionBtn.removeAttribute("disabled")},time);
+  setTimeout(function(){selectionBtn.removeAttribute("disabled")},time);
+  setTimeout(function(){bubbleBtn.removeAttribute("disabled")},time);
+  setTimeout(function(){resetBtn.removeAttribute("disabled")},time);
 }
 
 //Reset Array
