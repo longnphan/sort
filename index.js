@@ -59,7 +59,6 @@ window.onload = () => {
   draw(arr, 0);
 }
 
-
 //Insertion Sort Algorithm
 function insertion() {
   disableButtons(700);
@@ -83,6 +82,7 @@ function* insertionSort(array) {
     }
     array[j + 1] = temp;
 
+    //Update swap counter
     swaps++;
     numOfSwaps.innerHTML = `Swaps: ${swaps}`;
 
@@ -120,6 +120,7 @@ function* selectSort(array) {
       array[i] = array[min];
       array[min] = temp;
 
+      //Update swap counter
       swaps++;
       numOfSwaps.innerHTML = `Swaps: ${swaps}`;
 
@@ -151,6 +152,7 @@ function* bubbleSort(array) {
         array[j + 1] = array[j];
         array[j] = temp;
 
+        //Update swap counter
         swaps++;
         numOfSwaps.innerHTML = `Swaps: ${swaps}`;
         draw(array, j);
@@ -175,6 +177,7 @@ function disableButtons(time) {
 //Reset Array
 function reset() {
   swaps = 0;
+  numOfSwaps.innerHTML = `Swaps: ${swaps}`;
   shuffle(arr);
   draw(arr, 0);
 }
