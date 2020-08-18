@@ -1,7 +1,4 @@
-const bubbleBtn = document.querySelector(".bubble-btn");
-const selectionBtn = document.querySelector(".selection-btn");
-const insertionBtn = document.querySelector(".insertion-btn");
-const resetBtn = document.querySelector(".reset-btn");
+const allButtons = document.querySelectorAll("button");
 let numOfSwaps = document.querySelector(".swap-text");
 let swaps = 0;
 
@@ -129,15 +126,10 @@ function* insertionSort(array) {
 //Disable buttons while sorting is in progress
 function disableButtons(time) {
   //Disables buttons when button is pressed
-  insertionBtn.disabled = true;
-  selectionBtn.disabled = true;
-  bubbleBtn.disabled = true;
-  resetBtn.disabled = true;
-  //Enables buttons to be pressed
-  setTimeout(function(){insertionBtn.removeAttribute("disabled")}, time);
-  setTimeout(function(){selectionBtn.removeAttribute("disabled")}, time);
-  setTimeout(function(){bubbleBtn.removeAttribute("disabled")}, time);
-  setTimeout(function(){resetBtn.removeAttribute("disabled")}, time);
+  allButtons.forEach(item => item.disabled = true);
+
+  //Enables buttons to be pressed after sorting is completed
+  allButtons.forEach(item => setTimeout(() => item.removeAttribute("disabled"), time));
 }
 
 //Reset Array
